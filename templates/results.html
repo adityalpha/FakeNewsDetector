@@ -1,0 +1,88 @@
+<html>
+<link rel="stylesheet" media="screen" href = "{{ url_for('static', filename='bootstrap.min.css') }}">
+<meta name="viewport" content = "width=device-width, initial-scale=1.0">
+<head>
+</head>
+
+<body class = "body">
+  <style>
+  .middle {  
+    position: absolute;
+    left: 40%;
+    top: 50%;
+}
+</style>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">WebScraper</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+        <div class="row">
+          <div class="col-sm" id="YouTube"></div>
+          <div class="col-sm" id="Wikipedia"></div>
+        </div>
+    </div>
+  <script>
+    var text="";
+    for(var i=0;i<5;i++){
+        text=text+"<h2 id=\"y-title"+i+"\"></h2><p id=\"y-desc"+i+"\"></p>";
+    }
+    document.getElementById('YouTube').innerHTML = text;  
+    var elem;
+    var prefix = 'y-title';
+    for(var i = 0; i<5 && (elem = document.getElementById(prefix + i)); i++) {
+        value = {{data|tojson}}['YouTube']['title'][i]
+        if(typeof elem !== 'undefined' && elem !== null) {
+            elem.innerHTML = value;
+        }
+    }   
+    var prefix = 'y-desc';
+    for(var i = 0; i<5 && (elem = document.getElementById(prefix + i)); i++) {
+        value = {{data|tojson}}['YouTube']['desc'][i]
+        if(typeof elem !== 'undefined' && elem !== null) {
+            elem.innerHTML = value;
+        }
+    }   
+
+
+
+    var text="";
+    for(var i=0;i<5;i++){
+        text=text+"<h2 id=\"w-title"+i+"\"></h2><p id=\"w-desc"+i+"\"></p>";
+    }
+    document.getElementById('Wikipedia').innerHTML = text;  
+    var elem;
+    var prefix = 'w-title';
+    for(var i = 0; i<5 && (elem = document.getElementById(prefix + i)); i++) {
+        value = {{data|tojson}}['Wikipedia']['title'][i]
+        if(typeof elem !== 'undefined' && elem !== null) {
+            elem.innerHTML = value;
+        }
+    }   
+    var prefix = 'w-desc';
+    for(var i = 0; i<5 && (elem = document.getElementById(prefix + i)); i++) {
+        value = {{data|tojson}}['Wikipedia']['desc'][i]
+        if(typeof elem !== 'undefined' && elem !== null) {
+            elem.innerHTML = value;
+        }
+    }   
+
+
+
+      console.log({{data|tojson}})
+  </script>
+</body>
+</html>
